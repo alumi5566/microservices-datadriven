@@ -9,8 +9,7 @@ resource "oci_containerengine_cluster" "okell_cluster" {
   }
   kubernetes_version = "v1.27.2"
   name               = "grabdish"
-#  vcn_id             = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id             = oci_core_vcn.okell_vcn.id
   #Optional
   options {
     service_lb_subnet_ids = [oci_core_subnet.svclb_Subnet.id]

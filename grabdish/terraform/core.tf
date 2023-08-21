@@ -7,8 +7,7 @@ resource "oci_core_vcn" "okell_vcn" {
 resource "oci_core_internet_gateway" "ig" {
    compartment_id = var.ociCompartmentOcid
    display_name   = "ClusterInternetGateway"
-#   vcn_id         = oci_core_vcn.okell_vcn.id
-   vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+   vcn_id         = oci_core_vcn.okell_vcn.id
 }
 /*resource "oci_core_dhcp_options" "grabdish" {
     #Required
@@ -62,8 +61,7 @@ resource oci_core_nat_gateway ngw {
   freeform_tags = {
   }
   #public_ip_id = oci_core_public_ip.puip.id
-#  vcn_id       = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id       = oci_core_vcn.okell_vcn.id
 }
 resource oci_core_service_gateway sg {
   compartment_id = var.ociCompartmentOcid
@@ -74,8 +72,7 @@ resource oci_core_service_gateway sg {
   services {
     service_id = data.oci_core_services.services.services.0.id
   }
-#  vcn_id = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id = oci_core_vcn.okell_vcn.id
 }
 resource oci_core_route_table private {
   compartment_id = var.ociCompartmentOcid
@@ -102,8 +99,7 @@ resource oci_core_route_table private {
     network_entity_id = oci_core_service_gateway.sg.id
   }
   */
-#  vcn_id = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id = oci_core_vcn.okell_vcn.id
 }
 resource oci_core_default_route_table public {
   display_name = "public"
@@ -122,8 +118,7 @@ resource "oci_core_subnet" "endpoint_Subnet" {
   #availability_domain = data.oci_identity_availability_domain.ad1.name
   cidr_block          = "10.0.0.0/28"
   compartment_id      = var.ociCompartmentOcid
-#  vcn_id              = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
   security_list_ids   = [oci_core_security_list.endpoint.id]
   display_name        = "SubNet1ForEndpoint"
@@ -136,8 +131,7 @@ resource "oci_core_subnet" "nodePool_Subnet" {
   #availability_domain = data.oci_identity_availability_domain.ad1.name
   cidr_block          = "10.0.10.0/24"
   compartment_id      = var.ociCompartmentOcid
-#  vcn_id              = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
   security_list_ids = [oci_core_security_list.nodePool.id]
   display_name      = "SubNet1ForNodePool"
@@ -150,8 +144,7 @@ resource "oci_core_subnet" "svclb_Subnet" {
   #availability_domain = data.oci_identity_availability_domain.ad1.name
   cidr_block          = "10.0.20.0/24"
   compartment_id      = var.ociCompartmentOcid
-#  vcn_id              = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
   security_list_ids = [oci_core_default_security_list.svcLB.id]
   display_name      = "SubNet1ForSvcLB"
@@ -346,8 +339,7 @@ resource oci_core_security_list nodePool {
     #udp_options = <<Optional value not found in discovery>>
   }
 */
-#  vcn_id = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id = oci_core_vcn.okell_vcn.id
 }
 
 resource oci_core_security_list endpoint {
@@ -447,8 +439,7 @@ resource oci_core_security_list endpoint {
     #tcp_options = <<Optional value not found in discovery>>
     #udp_options = <<Optional value not found in discovery>>
   }
-#  vcn_id = oci_core_vcn.okell_vcn.id
-  vcn_id         = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
+  vcn_id = oci_core_vcn.okell_vcn.id
 }
 
 resource oci_core_default_security_list svcLB {

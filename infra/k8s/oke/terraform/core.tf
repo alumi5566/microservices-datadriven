@@ -9,7 +9,8 @@ locals {
 
 data "oci_core_vcn" "vcn" {
     #Required
-    vcn_id = var.vcnOcid
+#    vcn_id = var.vcnOcid
+    vcn_id = "ocid1.vcn.oc1.iad.amaaaaaaphl7driadrhgnz3kyfgvljjg75ieo4yxxd44zxnouiwcaxo7uayq"
 }
 
 data "oci_core_nat_gateways" "ngws" {

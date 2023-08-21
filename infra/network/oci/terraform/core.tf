@@ -1,5 +1,5 @@
 resource "oci_core_vcn" "vcn" {
-  cidr_block     = "10.0.0.0/16"
+  cidr_block     = "10.1.0.0/16"
   compartment_id = var.ociCompartmentOcid
   display_name   = var.vcnDnsLabel
   dns_label    = var.vcnDnsLabel

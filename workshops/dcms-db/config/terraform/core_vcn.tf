@@ -46,7 +46,7 @@ resource "oci_core_default_security_list" "export_Default-Security-List-for-apex
       type = "3"
     }
     protocol    = "1"
-    source      = "10.0.0.0/16"
+    source      = "10.1.0.0/16"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
   }

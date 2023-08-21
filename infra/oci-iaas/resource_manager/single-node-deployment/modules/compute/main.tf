@@ -110,7 +110,7 @@ resource "oci_core_network_security_group_security_rule" "ingress_icmp_3" {
   network_security_group_id = oci_core_network_security_group.nsg.id # Required
   direction                 = "INGRESS"                              # Required
   protocol                  = "1"                                    # Required
-  source                    = "10.0.0.0/16"                          # Required
+  source                    = "10.1.0.0/16"                          # Required
   source_type               = "CIDR_BLOCK"                           # Required
   stateless                 = false                                  # Optional
   icmp_options {                                                     # Optional

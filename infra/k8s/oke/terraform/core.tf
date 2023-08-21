@@ -2,9 +2,9 @@
 //Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 locals {
-    endpoint_cidr_block = "10.0.0.0/28"
-    nodepool_cidr_block = "10.0.10.0/24"
-    svclb_cidr_block    = "10.0.20.0/24"
+    endpoint_cidr_block = "10.1.0.0/28"
+    nodepool_cidr_block = "10.1.10.0/24"
+    svclb_cidr_block    = "10.1.20.0/24"
 }
 
 data "oci_core_vcn" "vcn" {

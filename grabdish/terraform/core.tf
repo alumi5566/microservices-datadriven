@@ -1,5 +1,5 @@
 resource "oci_core_vcn" "okell_vcn" {
-  cidr_block     = "10.0.0.0/16"
+  cidr_block     = "10.1.0.0/16"
   compartment_id = var.ociCompartmentOcid
   display_name   = "grabdish"
   dns_label    = "grabdish"
@@ -116,7 +116,7 @@ resource oci_core_default_route_table public {
 resource "oci_core_subnet" "endpoint_Subnet" {
   #Required
   #availability_domain = data.oci_identity_availability_domain.ad1.name
-  cidr_block          = "10.0.0.0/28"
+  cidr_block          = "10.1.0.0/28"
   compartment_id      = var.ociCompartmentOcid
   vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
@@ -129,7 +129,7 @@ resource "oci_core_subnet" "endpoint_Subnet" {
 resource "oci_core_subnet" "nodePool_Subnet" {
   #Required
   #availability_domain = data.oci_identity_availability_domain.ad1.name
-  cidr_block          = "10.0.10.0/24"
+  cidr_block          = "10.1.10.0/24"
   compartment_id      = var.ociCompartmentOcid
   vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
@@ -142,7 +142,7 @@ resource "oci_core_subnet" "nodePool_Subnet" {
 resource "oci_core_subnet" "svclb_Subnet" {
   #Required
   #availability_domain = data.oci_identity_availability_domain.ad1.name
-  cidr_block          = "10.0.20.0/24"
+  cidr_block          = "10.1.20.0/24"
   compartment_id      = var.ociCompartmentOcid
   vcn_id              = oci_core_vcn.okell_vcn.id
   # Provider code tries to maintain compatibility with old versions.
@@ -158,7 +158,7 @@ resource oci_core_security_list nodePool {
   display_name = "nodepool"
   egress_security_rules {
     description      = "Allow pods on one worker node to communicate with pods on other worker nodes"
-    destination      = "10.0.10.0/24"
+    destination      = "10.1.10.0/24"
     destination_type = "CIDR_BLOCK"
     #icmp_options = <<Optional value not found in discovery>>
     protocol  = "all"
@@ -168,7 +168,7 @@ resource oci_core_security_list nodePool {
   }
   egress_security_rules {
     description      = "Access to Kubernetes API Endpoint"
-    destination      = "10.0.0.0/28"
+    destination      = "10.1.0.0/28"
     destination_type = "CIDR_BLOCK"
     #icmp_options = <<Optional value not found in discovery>>
     protocol  = "6"
@@ -182,7 +182,7 @@ resource oci_core_security_list nodePool {
   }
   egress_security_rules {
     description      = "Kubernetes worker to control plane communication"
-    destination      = "10.0.0.0/28"
+    destination      = "10.1.0.0/28"
     destination_type = "CIDR_BLOCK"
     #icmp_options = <<Optional value not found in discovery>>
     protocol  = "6"
@@ -196,7 +196,7 @@ resource oci_core_security_list nodePool {
   }
   egress_security_rules {
     description      = "Path discovery"
-    destination      = "10.0.0.0/28"
+    destination      = "10.1.0.0/28"
     destination_type = "CIDR_BLOCK"
     icmp_options {
       code = "4"
@@ -266,7 +266,7 @@ resource oci_core_security_list nodePool {
     description = "Allow pods on one worker node to communicate with pods on other worker nodes"
     #icmp_options = <<Optional value not found in discovery>>
     protocol    = "all"
-    source      = "10.0.10.0/24"
+    source      = "10.1.10.0/24"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     #tcp_options = <<Optional value not found in discovery>>
@@ -279,7 +279,7 @@ resource oci_core_security_list nodePool {
       type = "3"
     }
     protocol    = "1"
-    source      = "10.0.0.0/28"
+    source      = "10.1.0.0/28"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     #tcp_options = <<Optional value not found in discovery>>
@@ -289,7 +289,7 @@ resource oci_core_security_list nodePool {
     description = "TCP access from Kubernetes Control Plane"
     #icmp_options = <<Optional value not found in discovery>>
     protocol    = "6"
-    source      = "10.0.0.0/28"
+    source      = "10.1.0.0/28"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     #tcp_options = <<Optional value not found in discovery>>
@@ -361,7 +361,7 @@ resource oci_core_security_list endpoint {
   }
   egress_security_rules {
     description      = "All traffic to worker nodes"
-    destination      = "10.0.10.0/24"
+    destination      = "10.1.10.0/24"
     destination_type = "CIDR_BLOCK"
     #icmp_options = <<Optional value not found in discovery>>
     protocol  = "6"
@@ -371,7 +371,7 @@ resource oci_core_security_list endpoint {
   }
   egress_security_rules {
     description      = "Path discovery"
-    destination      = "10.0.10.0/24"
+    destination      = "10.1.10.0/24"
     destination_type = "CIDR_BLOCK"
     icmp_options {
       code = "4"
@@ -402,7 +402,7 @@ resource oci_core_security_list endpoint {
     description = "Kubernetes worker to Kubernetes API endpoint communication"
     #icmp_options = <<Optional value not found in discovery>>
     protocol    = "6"
-    source      = "10.0.10.0/24"
+    source      = "10.1.10.0/24"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
@@ -416,7 +416,7 @@ resource oci_core_security_list endpoint {
     description = "Kubernetes worker to control plane communication"
     #icmp_options = <<Optional value not found in discovery>>
     protocol    = "6"
-    source      = "10.0.10.0/24"
+    source      = "10.1.10.0/24"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     tcp_options {
@@ -433,7 +433,7 @@ resource oci_core_security_list endpoint {
       type = "3"
     }
     protocol    = "1"
-    source      = "10.0.10.0/24"
+    source      = "10.1.10.0/24"
     source_type = "CIDR_BLOCK"
     stateless   = "false"
     #tcp_options = <<Optional value not found in discovery>>

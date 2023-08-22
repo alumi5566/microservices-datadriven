@@ -43,6 +43,7 @@ spec:
         volumeMounts:
         - name: creds
           mountPath: /msdataworkshop/creds
+          readOnly: false
         ports:
         - containerPort: 8080
         livenessProbe:

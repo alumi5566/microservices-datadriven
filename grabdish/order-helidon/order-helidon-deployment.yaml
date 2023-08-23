@@ -35,11 +35,7 @@ spec:
         - name: VAULT_SECRET_OCID
           value: "${VAULT_SECRET_OCID-}"
         - name: dbpassword
-          valueFrom:
-            secretKeyRef:
-              name: dbuser
-              key: dbpassword
-              optional: true #not needed/used if using VAULT_SECRET_OCID exists
+          value: "ORDERUSER"
         volumeMounts:
         - name: creds
           mountPath: /msdataworkshop/creds

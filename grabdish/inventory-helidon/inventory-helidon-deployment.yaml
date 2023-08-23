@@ -37,11 +37,7 @@ spec:
             - name: isSuggestiveSaleAIEnabled
               value: "${IS_SUGGESTIVE_SALE_ENABLED}"
             - name: dbpassword
-              valueFrom:
-                secretKeyRef:
-                  name: dbuser
-                  key: dbpassword
-                  optional: true #not needed/used if using VAULT_SECRET_OCID exists
+              value: "INVENTORYUSER"
           volumeMounts:
             - name: creds
               mountPath: /msdataworkshop/creds
